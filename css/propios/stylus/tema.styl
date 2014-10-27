@@ -1,0 +1,47 @@
+/*		Khriz Enríquez @khrizenriquez*/
+
+//@import normalize
+@import url("../libs/foundation.min.css")
+
+//		Variables globales
+fondo = #00aba9
+
+/*		---------------------------------Selectores generales*/
+body
+	//background fondo
+	background url("../../img/background/azul-difuminado.jpg") no-repeat fixed
+	background-size 100% 100%
+	//background linear-(180deg, #f0f, #f66)
+	font-size 16px
+h1
+	color white
+textarea
+	resize none
+
+/*		---------------------------------Selectores por id*/
+#contenidoInferior
+	.panel
+		border none
+		overflow hidden
+		padding 0
+		position relative
+		#diagrama, #tablaDatos
+			transition all 1s ease
+		#tablaDatos
+			background red
+			//		Por defecto aparece hasta la derecha sin mostrarse
+			height 100%
+			left 100%
+			padding 0
+			position absolute
+			top 0%
+
+
+/*		---------------------------------Selectores por clase*/
+.barra
+	background rgba(black, .9)
+	color white
+	font-size 1.5em
+.panel
+	box-shadow 3px 3px 5px #202020
+/*		---------------------------------Media queries*/

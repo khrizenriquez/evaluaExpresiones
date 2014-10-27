@@ -1,0 +1,105 @@
+<!doctype html>
+<html class="no-js" lang="es-GT">
+  	<head>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	    <title>Expresiones regulares</title>
+
+	    <link rel="stylesheet" href="css/propios/tema.css" />
+	    <script src="js/libs/modernizr.js"></script>
+  	</head>
+  	<body>
+    
+	    <section>
+		    <div class="row">
+		      <div class="large-12 columns">
+		        <h1>Ingresa tu expresión regular</h1>
+		      </div>
+		    </div>
+	    
+	    	<div class="row">
+	      		<div class="large-12 columns">
+	      			<div class="panel">
+	      				<form>
+						  	<div class="row">
+						    	<div class="large-6 columns">
+						      		<label>Escribe la expresión regular
+						        		<input autofocus maxlength="100" type="text" placeholder="Escribe la expresión regular" id="txtER" />
+						      		</label>
+						   	 	</div>
+						  	</div>
+						  	<div class="row">
+						    	<div class="large-6 columns">
+						      		<label>Ingresa una cadena
+						        		<textarea id="txtAreaCadena" cols="30" rows="3" placeholder="Ingresa una cadena para ser puesta a prueba"></textarea>
+						      		</label>
+						    	</div>
+						    	<div class="large-4 columns">
+						      		<label>Selecciona la cadena (si esta en archivo)
+						        		<input type="file" id="fileCadena" accept=".txt" single />
+						        		<button id="btnSubirArchivo" type="button" class="button round">Subir archivo</button>
+						        		<button id="btnEliminarArchivo" type="button" class="button tiny alert round">Quitar archivo</button>
+						      		</label>
+						    	</div>
+						    	<div class="large-2 columns">
+						      		<button id="btnProcesar" type="button" class="button success expand round">Procesar</button>
+						    	</div>
+						  	</div>
+						  	<div id="msjER" class="msj"></div>
+						</form>
+
+						<div class="row">
+		      				<div id="divER" class="large-4 columns">
+		      					<label>Esta es la expresión regular</label>
+		      					<p></p>
+		      				</div>
+		      				<div id="divCadena" class="large-4 columns">
+		      					<label>Esta es tu cadena</label>
+		      					<p></p>
+		      				</div>
+		      				<div id="divTextoExtra" class="large-4 columns">
+		      					<label>Algún texto extra</label>
+		      					<p></p>
+		      				</div>
+		      			</div>
+	      			</div>
+	      		</div>
+	      	</div>
+
+			<div id="contenidoInferior" class="row">
+				<div class="large-12 columns">
+			      	<div class="panel">
+			      		<div class="row">
+				      		<div id="diagrama" class="large-12 columns">
+				      			<div id="barraDiagrama" class="barra">Ver tabla</div>
+				      			<p class="p">
+				      				<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus ipsam quis dolorum autem quae ullam dicta, placeat eos est eius hic quasi perferendis, ab libero temporibus, magni dolores et totam!</span>
+				      				<span>Iste maiores neque recusandae minus natus reiciendis quis, libero incidunt, excepturi molestias aspernatur dicta. Provident expedita est dolores, consequatur maxime quasi, ad, repellat iure totam odit culpa reiciendis perferendis quam.</span>
+				      				<span>Veniam at laborum pariatur beatae, repellat velit debitis voluptas, necessitatibus ipsam neque tempore quas. Facilis ex veritatis quas atque deserunt fuga cumque incidunt doloribus? Debitis reiciendis enim molestiae aspernatur, dignissimos.</span>
+				      			</p>
+				      		</div>
+				      	</div>
+				      	<div class="row">
+				      		<div id="tablaDatos" class="large-12 columns">
+				      			<div id="barraTablaDatos" class="barra">Ver diagrama</div>
+				      			<p class="p">
+				      				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae culpa autem alias voluptates totam rerum praesentium, repudiandae nihil. Vitae, fugit quae quia ipsam voluptatibus magnam temporibus? Sequi, dolorum aperiam nam?
+				      			</p>
+				      		</div>
+				      	</div>
+			      	</div>
+				</div>
+	      	</div>
+    	</section>
+
+	    <script src="js/libs/prefixfree.min.js"></script>
+	    <script src="js/libs/jquery.js"></script>
+	    <script src="js/libs/foundation.min.js"></script>
+	    <script src="js/Init.js"></script>
+	    <script src="js/modelo/DatosUsuario.js"></script>
+	    <script src="js/controlador/ValidaDatos.js"></script>
+    	<script>
+      	$(document).foundation();
+    	</script>
+  	</body>
+</html>
