@@ -1,4 +1,5 @@
 var DatosUsuario = function () {
+	//		Inicializando mis valores por defecto
 	init: {
 		this.cadena = "";
 		this.er = "";

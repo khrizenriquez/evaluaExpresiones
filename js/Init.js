@@ -1,4 +1,5 @@
 (function () {
+	'use strict';
 	document.addEventListener("DOMContentLoaded", function () {
 		document.getElementById("barraDiagrama").addEventListener("click", tabla);
 		document.getElementById("barraTablaDatos").addEventListener("click", diagrama);

@@ -1,10 +1,5 @@
-//		Colores generales a utilizar
-var Colores = {
-	msjRojo: "#e74c3c",
-	msjVerde: "#27ae60",
-	msjAzul: "#2980b9",
-	msjGris: "#7f8c8d"
-};
+'use strict';
+
 document.addEventListener("DOMContentLoaded", function () {
 	document.getElementById("btnProcesar").addEventListener("click", new ValidaDatos().validaDatos);
 	document.getElementById("btnEliminarArchivo").addEventListener("click", new ValidaDatos().quitarArchivo);
@@ -34,8 +29,6 @@ var ValidaDatos = function () {
 			//		Le doy prioridad a mi archivo de texto
 			(file.value.length > 0) ? exp = self.archivoTexto(file.files) : exp = cadena.value;
 
-			console.log(exp);
-
 			//		Validando la cadena
 			if (self.validandoCadena(er.value, exp)) {
 				//		Limpio el texto de los valores donde posiblemente pudieran haber valores
@@ -51,6 +44,14 @@ var ValidaDatos = function () {
 				self.mostrandoOpciones(document.getElementById("divCadena"), dUsuario.getCadena(), "Cadena desde caja de texto");
 
 				document.getElementById("fileCadena").value = "";
+
+				//		Lleno mi objeto con la er que recibo del usuario
+				//		Lleno mi objeto con la er que recibo del usuario
+				var n = new Automata();
+				n.lenguaje(dUsuario.getER());
+				console.log("Caracteres " + n.getCaracteresEspeciales());
+				console.log("Operadores " + n.getOperadores());
+				console.log("Alfabeto " + n.getAlfabeto());
 			} else {
 				self.mostrandoOpciones(document.getElementById("divTextoExtra"), "Cadena inválida");
 				msj.style.color = Colores.msjRojo;
@@ -88,6 +89,12 @@ var ValidaDatos = function () {
 				respuesta = e.target.result;
 			};
 			reader.readAsText(archivo);
+
+			//		Lleno mi objeto con la er que recibo del usuario
+			var n = new Automata();
+			n.lenguaje(dUsuario.getER());
+			console.log("Caracteres ");
+			console.log(n.getCaracteresEspeciales());
 
 			return respuesta;
 		} else {
