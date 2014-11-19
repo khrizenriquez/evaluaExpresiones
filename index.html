@@ -3,13 +3,12 @@
   	<head>
 	    <meta charset="utf-8" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	    <title>Expresiones regulares</title>
+	    <title>Autómatas</title>
 
 	    <link rel="stylesheet" href="css/propios/tema.css" />
 	    <script src="js/libs/modernizr.js"></script>
   	</head>
   	<body>
-    
 	    <section>
 		    <div class="row">
 		      <div class="large-12 columns">
@@ -22,27 +21,23 @@
 	      			<div class="panel">
 	      				<form>
 						  	<div class="row">
-						    	<div class="large-6 columns">
+						    	<div class="large-8 columns">
 						      		<label>Escribe la expresión regular
 						        		<input autofocus maxlength="100" type="text" placeholder="Escribe la expresión regular" id="txtER" />
 						      		</label>
 						   	 	</div>
+						   	 	<div class="large-4 columns">
+						      		<button id="btnProcesar" type="button" class="button success expand round">Procesar ER</button>
+						    	</div>
 						  	</div>
 						  	<div class="row">
-						    	<div class="large-6 columns">
+						    	<div class="large-8 columns">
 						      		<label>Ingresa una cadena
-						        		<textarea id="txtAreaCadena" cols="30" rows="3" placeholder="Ingresa una cadena para ser puesta a prueba"></textarea>
+						        		<input maxlength="100" type="text" placeholder="Ingresa una cadena para ser puesta a prueba" id="txtAreaCadena" />
 						      		</label>
 						    	</div>
 						    	<div class="large-4 columns">
-						      		<label>Selecciona la cadena (si esta en archivo)
-						        		<input type="file" id="fileCadena" accept=".txt" single />
-						        		<button id="btnSubirArchivo" type="button" class="button round">Subir archivo</button>
-						        		<button id="btnEliminarArchivo" type="button" class="button tiny alert round">Quitar archivo</button>
-						      		</label>
-						    	</div>
-						    	<div class="large-2 columns">
-						      		<button id="btnProcesar" type="button" class="button success expand round">Procesar</button>
+						      		<button id="btnCadena" type="button" class="button default expand round">Validad cadena</button>
 						    	</div>
 						  	</div>
 						  	<div id="msjER" class="msj"></div>
@@ -58,7 +53,7 @@
 		      					<p></p>
 		      				</div>
 		      				<div id="divTextoExtra" class="large-4 columns">
-		      					<label>Algún texto extra</label>
+		      					<label>Información adicional</label>
 		      					<p></p>
 		      				</div>
 		      			</div>
@@ -71,20 +66,18 @@
 			      	<div class="panel">
 			      		<div class="row">
 				      		<div id="diagrama" class="large-12 columns">
-				      			<div id="barraDiagrama" class="barra">Ver tabla</div>
-				      			<p class="p">
-				      				<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus ipsam quis dolorum autem quae ullam dicta, placeat eos est eius hic quasi perferendis, ab libero temporibus, magni dolores et totam!</span>
-				      				<span>Iste maiores neque recusandae minus natus reiciendis quis, libero incidunt, excepturi molestias aspernatur dicta. Provident expedita est dolores, consequatur maxime quasi, ad, repellat iure totam odit culpa reiciendis perferendis quam.</span>
-				      				<span>Veniam at laborum pariatur beatae, repellat velit debitis voluptas, necessitatibus ipsam neque tempore quas. Facilis ex veritatis quas atque deserunt fuga cumque incidunt doloribus? Debitis reiciendis enim molestiae aspernatur, dignissimos.</span>
-				      			</p>
+				      			<div id="barraDiagrama" class="barra">Ver tabla <i class="fi-arrow-right"></i></div>
+				      			<div id="paper" class="contenedor">
+				      				<i class="mientras fi-torso-business" title="Diagrama de estados"></i>
+				      			</div>
 				      		</div>
 				      	</div>
 				      	<div class="row">
 				      		<div id="tablaDatos" class="large-12 columns">
-				      			<div id="barraTablaDatos" class="barra">Ver diagrama</div>
-				      			<p class="p">
-				      				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae culpa autem alias voluptates totam rerum praesentium, repudiandae nihil. Vitae, fugit quae quia ipsam voluptatibus magnam temporibus? Sequi, dolorum aperiam nam?
-				      			</p>
+				      			<div id="barraTablaDatos" class="barra"><i class="fi-arrow-left"></i> Ver diagrama</div>
+				      			<div class="contenedor">
+				      				<i class="mientras fi-align-justify" title="Tabla de datos"></i>
+				      			</div>
 				      		</div>
 				      	</div>
 			      	</div>
@@ -94,15 +87,73 @@
 
 	    <script src="js/libs/prefixfree.min.js"></script>
 	    <script src="js/libs/jquery.js"></script>
-	    <script src="js/libs/d3.min.js" charset="utf-8"></script>
+	    <script src="js/libs/joint.min.js"></script>
+	    <script src="js/libs/joint.shapes.fsa.min.js"></script>
 	    <script src="js/libs/foundation.min.js"></script>
-	    <script src="js/modelo/Colores.js"></script>
+	    <script src="js/modelo/Generales.js"></script>
 	    <script src="js/Init.js"></script>
 	    <script src="js/modelo/Automata.js"></script>
 	    <script src="js/modelo/DatosUsuario.js"></script>
+	    <script src="js/modelo/Transicion.js"></script>
 	    <script src="js/controlador/ValidaDatos.js"></script>
     	<script>
       	$(document).foundation();
+    	</script>
+    	<script>
+    	var graph = new joint.dia.Graph;
+
+var paper = new joint.dia.Paper({
+    el: $('#paper'),
+    width: 800,
+    height: 600,
+    gridSize: 1,
+    model: graph
+});
+
+function state(x, y, label) {
+    
+    var cell = new joint.shapes.fsa.State({
+        position: { x: x, y: y },
+        size: { width: 60, height: 60 },
+        attrs: { text : { text: label }}
+    });
+    graph.addCell(cell);
+    return cell;
+};
+
+function link(source, target, label, vertices) {
+    
+    var cell = new joint.shapes.fsa.Arrow({
+        source: { id: source.id },
+        target: { id: target.id },
+        labels: [{ position: .5, attrs: { text: { text: label || '', 'font-weight': 'bold' } } }],
+        vertices: vertices || []
+    });
+    graph.addCell(cell);
+    return cell;
+}
+
+var start = new joint.shapes.fsa.StartState({ position: { x: 50, y: 530 } });
+graph.addCell(start);
+
+var code  = state(180, 390, 'code');
+var slash = state(340, 220, 'slash');
+var star  = state(600, 400, 'star');
+var line  = state(190, 100, 'line');
+var block = state(560, 140, 'block');
+
+link(start, code,  'Inicio');
+link(code,  slash, '/');
+link(slash, code,  'primer cambio'/*, [{x: 270, y: 300}]*/);
+link(slash, line,  '/');
+link(line,  code,  'new\n line');
+link(slash, block, '*');
+link(block, star,  '*');
+link(star,  block, 'other'/*, [{x: 650, y: 290}]*/);
+link(star,  code,  '/'/*,     [{x: 490, y: 310}]*/);
+link(line,  line,  'other'/*, [{x: 115,y: 100}, {x: 250, y: 50}]*/);
+link(block, block, 'other'/*, [{x: 485,y: 140}, {x: 620, y: 90}]*/);
+link(code,  code,  'other'/*, [{x: 180,y: 500}, {x: 305, y: 450}]*/);
     	</script>
   	</body>
 </html>

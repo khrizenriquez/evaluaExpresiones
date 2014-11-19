@@ -1,2 +1,4 @@
-@import url("../libs/foundation.min.css");
-body{background:url("../../img/background/azul-difuminado.jpg") no-repeat fixed;background-size:100% 100%;font-size:16px}h1{color:#fff}textarea{resize:none}#contenidoInferior .panel{border:none;overflow:hidden;padding:0;position:relative;}#contenidoInferior .panel #diagrama,#contenidoInferior .panel #tablaDatos{transition:all 1s ease}#contenidoInferior .panel #tablaDatos{background:#f00;height:100%;left:100%;padding:0;position:absolute;top:0%}.barra{background:rgba(0,0,0,0.9);color:#fff;font-size:1.5em}.panel{box-shadow:3px 3px 5px #202020}
+@import url("../libs/foundation-icons.css");
+@import url("../libs/foundation.css");
+@import url("../libs/joint.min.css");
+body{background:url("../../img/background/azul-difuminado.jpg") no-repeat fixed;background-size:100% 100%;font-size:16px}h1{color:#fff}textarea{resize:none}#contenidoInferior .panel{border:none;overflow:hidden;padding:0;position:relative;}#contenidoInferior .panel #diagrama,#contenidoInferior .panel #tablaDatos{transition:all 1s ease}#contenidoInferior .panel #tablaDatos{background:rgba(255,255,255,0.9);height:100%;left:100%;padding:0;position:absolute;top:0%}.barra{background:rgba(0,0,0,0.9);cursor:pointer;color:#fff;font-size:1.5em}.contenedor{text-align:center;}.contenedor .mientras{font-size:15em}.panel{box-shadow:3px 3px 5px #202020}

@@ -1,7 +1,10 @@
 /*		Khriz Enríquez @khrizenriquez*/
 
 //@import normalize
-@import url("../libs/foundation.min.css")
+//@import url("../libs/foundation.min.css")
+@import url("../libs/foundation-icons.css");
+@import url("../libs/foundation.css")
+@import url("../libs/joint.min.css")
 
 //		Variables globales
 fondo = #00aba9
@@ -28,8 +31,7 @@ textarea
 		#diagrama, #tablaDatos
 			transition all 1s ease
 		#tablaDatos
-			background red
-			//		Por defecto aparece hasta la derecha sin mostrarse
+			background rgba(white, .9)
 			height 100%
 			left 100%
 			padding 0
@@ -40,8 +42,13 @@ textarea
 /*		---------------------------------Selectores por clase*/
 .barra
 	background rgba(black, .9)
+	cursor pointer
 	color white
 	font-size 1.5em
+.contenedor
+	text-align center
+	.mientras
+		font-size 15em
 .panel
 	box-shadow 3px 3px 5px #202020
 /*		---------------------------------Media queries*/

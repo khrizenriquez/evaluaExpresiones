@@ -1,6 +1,8 @@
 /* Foundation was made by ZURB, an interaction design and design strategy firm in Campbell, CA */
 /* zurb.com versión 5 de foundation */
 /* humanstxt.org */
+Frontend
+@khrizenriquez
 
 /* SITE */
   Standards: HTML5, CSS3, JS

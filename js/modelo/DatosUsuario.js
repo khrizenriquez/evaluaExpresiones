@@ -3,7 +3,7 @@ var DatosUsuario = function () {
 	init: {
 		this.cadena = "";
 		this.er = "";
-	}
+	};
 
 	//		Setters
 	this.setER = function (er) {this.er = er;};

@@ -11,9 +11,9 @@ var Automata = function () {
 		this.operadores = [];
 		this.estadoInicial = "";
 		this.estadosFinales = [];
-		this.transiciones = [];
+		this.transiciones = ["q0"];
 		this.op = ["+", "*", "|"];
-		this.carac = ["{", "[", "(", ")", "]","}", "\s", "\t", "\n"];
+		this.carac = ["{", "[", "(", ")", "]","}"];
 	};
 
 	//		Getters
@@ -54,20 +54,14 @@ var Automata = function () {
 
 		//		Primero quito los caracteres especiales
 		for (var i in c) {
-			//console.log(c);
 			//		Validando si es número y tiene signo menos
 			if (c[i] == "-") {
 				if ((typeof(Number(c[i + 1])) == "number" && Number(c[i + 1]) !== "NaN")) {
-					//console.log(c[i- 1]);
-					//console.log(c[i - 1] !== undefined);
-					//console.log(expLetras.test(c[i - 1]));
-					//console.log(expNum.test(c[i - 1]));
 					if (c[i - 1] !== undefined) {
 						if (expLetras.test(c[i - 1]) == false && expNum.test(c[i - 1]) == false) {
 							c = c.replace(c[i + 1], "");
 							i--;
 						} else {
-							//c[i].concat(",");
 							c = c.replace(c[i], ",");
 							i--;
 						}
@@ -94,7 +88,7 @@ var Automata = function () {
 		}
 
 		//		Envío los arreglos ya de manera separada
-		filtroAlfabeto(c, "alfabeto");
+		filtroAlfabeto(c.replace(/,/g, ""), "alfabeto");
 		filtroAlfabeto(carac, "caracter");
 		filtroAlfabeto(op, "operadores")
 	}.bind(this);
@@ -103,7 +97,7 @@ var Automata = function () {
 	//		String: a 			String: tipo
 	var filtroAlfabeto = function (a, tipo) {
 		//		Convierto de string a arreglo mi parametro "a", de esa manera puedo ordenarlo
-		if (typeof(a) === "string") a = a.split(",");
+		if (typeof(a) === "string") a = a.split("");
 
 		//		Primero ordeno mi arreglo para que sea fácil eliminar los valores repetidos
 		a.sort(function (a, b) {
@@ -127,8 +121,9 @@ var Automata = function () {
 		//		Elimino la primer coma (,) posible
 		if (a[0] == "") a.splice(0, 1);
 
-		if (tipo == "alfabeto") 
+		if (tipo == "alfabeto") {
 			this.setAlfabeto(a);
+		}
 		else 
 		if (tipo == "caracter") 
 			this.setCaracteresEspeciales(a);
