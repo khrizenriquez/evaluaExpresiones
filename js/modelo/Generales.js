@@ -7,6 +7,11 @@ var Generales = (function () {
 			msjAzul: "#2980b9",
 			msjGris: "#7f8c8d"
 		},
+		diagrama: new go.Diagram("diagramaEstados"),
+		instanciaMD: new MostrandoDatos(),
+		Loaders:{
+			packmanNegro: "<img src='img/loaders/packmanNegro.GIF' alt='Cargando...' />"
+		}
 	};
 
 	return self;

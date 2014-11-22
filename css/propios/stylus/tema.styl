@@ -18,37 +18,53 @@ body
 	font-size 16px
 h1
 	color white
+footer
+	text-align center
+	label
+		a
+			color white
+			font-weight 300
+			text-decoration none
 textarea
 	resize none
-
 /*		---------------------------------Selectores por id*/
 #contenidoInferior
 	.panel
+		background rgba(white, 0)
 		border none
 		overflow hidden
 		padding 0
-		position relative
+		//position relative
 		#diagrama, #tablaDatos
+			background white
+			border-left rgba(black, .5) 1px solid
 			transition all 1s ease
-		#tablaDatos
-			background rgba(white, .9)
+		#diagrama
 			height 100%
-			left 100%
 			padding 0
-			position absolute
-			top 0%
-
-
+		#tablaDatos
+			height 100%
+			padding 0
+			//left 100%
+			//position absolute
+			//top 0%
+#diagramaEstados, #tipoAutomata
+	text-align center
 /*		---------------------------------Selectores por clase*/
 .barra
 	background rgba(black, .9)
-	cursor pointer
 	color white
+	cursor pointer
 	font-size 1.5em
+	padding-left 1em
 .contenedor
 	text-align center
 	.mientras
 		font-size 15em
-.panel
-	box-shadow 3px 3px 5px #202020
+.label
+	font-size .9em
+	margin-left .25em
+	margin-rigth .25em
+/*.panel
+	box-shadow 3px 3px 5px #202020*/
 /*		---------------------------------Media queries*/

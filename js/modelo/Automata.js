@@ -9,10 +9,7 @@ var Automata = function () {
 		this.alfabeto = [];
 		this.caracteresEspeciales = [];
 		this.operadores = [];
-		this.estadoInicial = "";
-		this.estadosFinales = [];
-		this.transiciones = ["q0"];
-		this.op = ["+", "*", "|"];
+		this.op = ["+", "*"];
 		this.carac = ["{", "[", "(", ")", "]","}"];
 	};
 
@@ -20,16 +17,10 @@ var Automata = function () {
 	this.getAlfabeto = function () {return this.alfabeto;};
 	this.getCaracteresEspeciales = function () {return this.caracteresEspeciales;};
 	this.getOperadores = function () {return this.operadores;};
-	this.getEstadoInicial = function () {return this.estadoInicial;};
-	this.getEstadosFinales = function () {return this.estadosFinales;};
-	this.getTransiciones = function () {return this.transiciones;};
 	//		Setters
 	this.setAlfabeto = function (t) {this.alfabeto = t;};
 	this.setCaracteresEspeciales = function (c) {this.caracteresEspeciales = c;};
 	this.setOperadores = function (o) {this.operadores = o;};
-	this.setEstadoInicial = function (eInicial) {this.estadoInicial = eInicial;};
-	this.setEstadosFinales = function (eFinal) {this.estadosFinales.push(eFinal);};
-	this.setTransiciones = function (tr) {this.transiciones.push(tr);};
 
 	//		Quitando valores a los arreglos
 	//		arr: t 			| int: pos

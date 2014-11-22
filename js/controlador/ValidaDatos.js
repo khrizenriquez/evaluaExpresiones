@@ -12,6 +12,7 @@ var ValidaDatos = function () {
 		var er = document.getElementById("txtER");
 		var cadena = "";
 		var msj = document.getElementById("msjER");
+		var datosPantalla = new MostrandoDatos();
 	};
 
 	this.validaER = function () {
@@ -27,18 +28,15 @@ var ValidaDatos = function () {
 			var t = new Transicion(er.value);
 			t.estado();
 
+			//document.getElementById("diagramaEstados").innerHTML = "";
 			msj.textContent = "";
 
 			//		Lleno mi objeto con la er que recibo del usuario
 			var n = new Automata();
 			n.lenguaje(dUsuario.getER());
-			console.log("Caracteres " + n.getCaracteresEspeciales());
-			console.log("Operadores " + n.getOperadores());
-			console.log("Alfabeto " + n.getAlfabeto());
-			console.log("Transiciones " + n.getTransiciones().__proto__);
 
-			self.mostrandoOpciones(document.getElementById("divTextoExtra"), "Alfabeto: "+n.getAlfabeto());
-			self.mostrandoOpciones(document.getElementById("divER"), dUsuario.getER());
+			datosPantalla.mostrandoOpciones(document.getElementById("divTextoExtra"), "<label>Σ: {"+n.getAlfabeto() + "}</label>");
+			datosPantalla.mostrandoOpciones(document.getElementById("divER"), dUsuario.getER());
 		} else {
 			msj.style.color = Generales.Colores.msjRojo;
 			msj.textContent = "Ingresa valores correctos para la expresión regular y la cadena";
@@ -55,18 +53,18 @@ var ValidaDatos = function () {
 			msj.textContent = "";
 
 			//		Validando la cadena
-			if (self.validandoCadena(er.value, exp)) {
+			if (self.validandoCadena(er.value, cadena.value)) {
 				//		Limpio el texto de los valores donde posiblemente pudieran haber valores
-				self.mostrandoOpciones(document.getElementById("divTextoExtra"), "");
+				datosPantalla.mostrandoOpciones(document.getElementById("divTextoExtra"), "");
 				msj.style.color = Generales.Colores.msjVerde;
 				msj.textContent = "";
 
 				//		Asigno los valores a mi clase DatosUsuario
-				dUsuario.setCadena(exp);
+				dUsuario.setCadena(cadena.value);
 
-				self.mostrandoOpciones(document.getElementById("divCadena"), dUsuario.getCadena(), "Cadena desde caja de texto");
+				datosPantalla.mostrandoOpciones(document.getElementById("divCadena"), dUsuario.getCadena(), "Cadena desde caja de texto");
 			} else {
-				self.mostrandoOpciones(document.getElementById("divTextoExtra"), "Cadena inválida");
+				datosPantalla.mostrandoOpciones(document.getElementById("divTextoExtra"), "Cadena inválida");
 				msj.style.color = Generales.Colores.msjRojo;
 				msj.textContent = "Lo siento pero la cadena ingresada no es válida para la expresión regular " + er.value;
 			}
@@ -76,17 +74,12 @@ var ValidaDatos = function () {
 		}
 		document.getElementById("btnCadena").disabled = false;
 	};
-
-	//		void: 	Solo sirve para mostrar el texto en los selectores que le indiquen
-	this.mostrandoOpciones = function (selector, mensaje, etiqueta) {	
-		//		Hago referencia a el parráfo, ahí coloco lo que venga de mensaje
-		if (etiqueta != "" && etiqueta != null && etiqueta != undefined) 
-			selector.children[0].textContent = etiqueta;
-
-		selector.children[1].textContent = mensaje;
-	};
 	//		boolean: 	Validando si la cadena es aceptada por la expresión regular
 	this.validandoCadena = function (er, cadena) {
+		console.log("----------------------------------");
+		console.log(er);
+		console.log(cadena);
+		console.log("----------------------------------");
 		var respuesta;
 		er = new RegExp("^"+ er +"$", "g");
 

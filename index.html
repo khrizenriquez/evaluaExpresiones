@@ -22,7 +22,7 @@
 	      				<form>
 						  	<div class="row">
 						    	<div class="large-8 columns">
-						      		<label>Escribe la expresión regular
+						      		<label>Escribe la expresión regular (por ejemplo a*)
 						        		<input autofocus maxlength="100" type="text" placeholder="Escribe la expresión regular" id="txtER" />
 						      		</label>
 						   	 	</div>
@@ -65,19 +65,18 @@
 				<div class="large-12 columns">
 			      	<div class="panel">
 			      		<div class="row">
-				      		<div id="diagrama" class="large-12 columns">
-				      			<div id="barraDiagrama" class="barra">Ver tabla <i class="fi-arrow-right"></i></div>
-				      			<div id="paper" class="contenedor">
+				      		<div id="diagrama" class="large-6 columns">
+				      			<div id="barraDiagrama" class="barra">Diagrama de estados</div>
+				      			<div id="diagramaEstados" class="contenedor" style="width:500px; height:350px">
 				      				<i class="mientras fi-torso-business" title="Diagrama de estados"></i>
 				      			</div>
 				      		</div>
-				      	</div>
-				      	<div class="row">
-				      		<div id="tablaDatos" class="large-12 columns">
-				      			<div id="barraTablaDatos" class="barra"><i class="fi-arrow-left"></i> Ver diagrama</div>
+				      		<div id="tablaDatos" class="large-6 columns">
+				      			<div id="barraTablaDatos" class="barra">Transiciones del autómata</div>
 				      			<div class="contenedor">
-				      				<i class="mientras fi-align-justify" title="Tabla de datos"></i>
+				      				<i class="mientras fi-align-justify"></i>
 				      			</div>
+				      			<div id="tipoAutomata"></div>
 				      		</div>
 				      	</div>
 			      	</div>
@@ -85,11 +84,15 @@
 	      	</div>
     	</section>
 
+    	<footer>
+    		<label><a href="https://twitter.com/khrizenriquez">@khrizenriquez</a></label>
+    	</footer>
+
 	    <script src="js/libs/prefixfree.min.js"></script>
 	    <script src="js/libs/jquery.js"></script>
-	    <script src="js/libs/joint.min.js"></script>
-	    <script src="js/libs/joint.shapes.fsa.min.js"></script>
+	    <script src="js/libs/go.js"></script>
 	    <script src="js/libs/foundation.min.js"></script>
+	    <script src="js/vista/MostrandoDatos.js"></script>
 	    <script src="js/modelo/Generales.js"></script>
 	    <script src="js/Init.js"></script>
 	    <script src="js/modelo/Automata.js"></script>
@@ -98,62 +101,6 @@
 	    <script src="js/controlador/ValidaDatos.js"></script>
     	<script>
       	$(document).foundation();
-    	</script>
-    	<script>
-    	var graph = new joint.dia.Graph;
-
-var paper = new joint.dia.Paper({
-    el: $('#paper'),
-    width: 800,
-    height: 600,
-    gridSize: 1,
-    model: graph
-});
-
-function state(x, y, label) {
-    
-    var cell = new joint.shapes.fsa.State({
-        position: { x: x, y: y },
-        size: { width: 60, height: 60 },
-        attrs: { text : { text: label }}
-    });
-    graph.addCell(cell);
-    return cell;
-};
-
-function link(source, target, label, vertices) {
-    
-    var cell = new joint.shapes.fsa.Arrow({
-        source: { id: source.id },
-        target: { id: target.id },
-        labels: [{ position: .5, attrs: { text: { text: label || '', 'font-weight': 'bold' } } }],
-        vertices: vertices || []
-    });
-    graph.addCell(cell);
-    return cell;
-}
-
-var start = new joint.shapes.fsa.StartState({ position: { x: 50, y: 530 } });
-graph.addCell(start);
-
-var code  = state(180, 390, 'code');
-var slash = state(340, 220, 'slash');
-var star  = state(600, 400, 'star');
-var line  = state(190, 100, 'line');
-var block = state(560, 140, 'block');
-
-link(start, code,  'Inicio');
-link(code,  slash, '/');
-link(slash, code,  'primer cambio'/*, [{x: 270, y: 300}]*/);
-link(slash, line,  '/');
-link(line,  code,  'new\n line');
-link(slash, block, '*');
-link(block, star,  '*');
-link(star,  block, 'other'/*, [{x: 650, y: 290}]*/);
-link(star,  code,  '/'/*,     [{x: 490, y: 310}]*/);
-link(line,  line,  'other'/*, [{x: 115,y: 100}, {x: 250, y: 50}]*/);
-link(block, block, 'other'/*, [{x: 485,y: 140}, {x: 620, y: 90}]*/);
-link(code,  code,  'other'/*, [{x: 180,y: 500}, {x: 305, y: 450}]*/);
     	</script>
   	</body>
 </html>
